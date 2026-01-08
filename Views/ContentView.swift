@@ -69,9 +69,10 @@ struct ContentView: View {
     }
 
     private var addTodoView: some View {
-        HStack(spacing: 8) {
+        HStack(spacing: 12) {
             TextField("Add a new todo", text: $newTodoTitle)
-                .textFieldStyle(.plain)
+                .textFieldStyle(.roundedBorder)
+                .textContentType(.none)
                 .onSubmit {
                     addTodo()
                 }
@@ -79,11 +80,13 @@ struct ContentView: View {
             Button(action: addTodo) {
                 Image(systemName: "plus.circle.fill")
                     .font(.title3)
+                    .foregroundColor(.accentColor)
             }
-            .buttonStyle(.plain)
+            .buttonStyle(.borderless)
             .disabled(newTodoTitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
         }
         .padding(.top, 16)
+        .padding(.bottom, 12)
     }
 
     private func addTodo() {
