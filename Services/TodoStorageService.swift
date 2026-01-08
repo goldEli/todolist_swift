@@ -31,6 +31,10 @@ final class TodoStorageService {
         guard let url = fileURL else { return }
 
         do {
+            // Ensure the directory exists
+            let directory = url.deletingLastPathComponent()
+            try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
+            
             let data = try encoder.encode(todos)
             try data.write(to: url, options: .atomic)
         } catch {
